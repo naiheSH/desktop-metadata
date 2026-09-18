@@ -14,6 +14,10 @@ jobs:
     steps:
     - name: Checkout Metadata Repo
       uses: actions/checkout@v6
+      with:
+        # Fork repositories default GITHUB_TOKEN to read-only. This token is
+        # also used by the final git push that publishes update metadata.
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
     - name: Get Latest Successful CI Build
       if: ${{ github.event.inputs.ci-build-number == '' }}
@@ -87,6 +91,8 @@ jobs:
         prerelease: ${{ env.IS_PRERELEASE == 'true' }}
         artifacts: './tmp/release/*'
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        allowUpdates: true
+        removeArtifacts: true
 
     - name: Push Metadata Changes
       run: |
