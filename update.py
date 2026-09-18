@@ -88,10 +88,10 @@ print("\n[UPDATE.PY] Writing release info...")
 
 version_esc = version.replace("-", "--")
 version_type_color = "limegreen" if version_type == "production" else "darkorange"
-RELEASE_INFO = f"""![版本：{version}](https://img.shields.io/badge/版本-{version_esc}-blue) ![渠道：{version_type}](https://img.shields.io/badge/渠道-{version_type}-{version_type_color}) ![下载量](https://img.shields.io/github/downloads/zetaloop/desktop/release-{version}/total?label=下载量&color=lightseagreen)
+RELEASE_INFO = f"""![版本：{version}](https://img.shields.io/badge/版本-{version_esc}-blue) ![渠道：{version_type}](https://img.shields.io/badge/渠道-{version_type}-{version_type_color}) ![下载量](https://img.shields.io/github/downloads/naiheSH/desktop/release-{version}/total?label=下载量&color=lightseagreen)
 
 由 GitHub Action 自动发布
-该汉化版支持自动更新，服务器为 [zetaloop/desktop-metadata](https://github.com/zetaloop/desktop-metadata)"""
+该汉化版支持自动更新，服务器为 [naiheSH/desktop-metadata](https://github.com/naiheSH/desktop-metadata)"""
 
 print(f"'''\n{RELEASE_INFO}\n'''")
 with open("./tmp/release_body.txt", "w", encoding="utf-8") as f:
@@ -124,7 +124,7 @@ for platform in ["x64", "arm64"]:
         else f"./tmp/release/GitHubDesktop-{version}.nupkg"
     )
     hash, size = calculate_hash_and_size(x64_nupkg_file)
-    url = f"https://github.com/zetaloop/desktop/releases/download/release-{version}/{os.path.basename(x64_nupkg_file)}"
+    url = f"https://github.com/naiheSH/desktop/releases/download/release-{version}/{os.path.basename(x64_nupkg_file)}"
     release_file = f"./metadata/win32-{platform}-{version_type}/RELEASES"
     release_line = f"{hash} {url} {size}"
     with open(release_file, "w") as f:
@@ -136,7 +136,7 @@ for platform in ["x64", "arm64"]:
 now = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 for platform in ["x64", "arm64"]:
     zip_file = f"./tmp/release/GitHubDesktop-macOS-{platform}.zip"
-    url = f"https://github.com/zetaloop/desktop/releases/download/release-{version}/{os.path.basename(zip_file)}"
+    url = f"https://github.com/naiheSH/desktop/releases/download/release-{version}/{os.path.basename(zip_file)}"
     metadata = {
         "url": url,
         "name": "",

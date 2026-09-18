@@ -22,7 +22,7 @@ jobs:
       with:
         script: |
           const { data } = await github.rest.actions.listWorkflowRunsForRepo({
-            owner: 'zetaloop',
+            owner: 'naiheSH',
             repo: 'desktop',
             workflow_id: 'ci.yml',
             status: 'success',
@@ -48,14 +48,14 @@ jobs:
             throw new Error('No CI build number provided or found.');
           }
           const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-            owner: 'zetaloop',
+            owner: 'naiheSH',
             repo: 'desktop',
             run_id: runId,
           });
           fs.mkdirSync('./tmp', { recursive: true });
           for (const artifact of artifacts.data.artifacts) {
             const download = await github.rest.actions.downloadArtifact({
-              owner: 'zetaloop',
+            owner: 'naiheSH',
               repo: 'desktop',
               artifact_id: artifact.id,
               archive_format: 'zip',
@@ -79,6 +79,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         repo: 'desktop'
+        owner: 'naiheSH'
         tag: release-${{ env.DESKTOP_VERSION }}
         name: GitHub Desktop ${{ env.DESKTOP_VERSION }}
         bodyFile: './tmp/release_body.txt'
